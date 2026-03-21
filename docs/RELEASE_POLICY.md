@@ -17,6 +17,7 @@
    - doc smoke build/run
    - consumer smoke build
    - GitHub Release creation
+5. If the tag push does not start automation, run the `Release` workflow manually with the same version string, for example `3.0.1`.
 
 ## Support Posture
 

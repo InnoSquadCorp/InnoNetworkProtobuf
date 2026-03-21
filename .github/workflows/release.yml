@@ -4,6 +4,12 @@ on:
   push:
     tags:
       - "*.*.*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Release tag to validate and publish, for example 3.0.1
+        required: true
+        type: string
 
 concurrency:
   group: release-${{ github.ref }}
@@ -20,6 +26,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.version || github.ref }}
 
       - name: Select Xcode
         run: sudo xcode-select -s /Applications/Xcode_26.0.1.app
@@ -52,13 +60,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.version || github.ref }}
 
       - name: Prepare release notes
         id: notes
         shell: bash
         run: |
           set -euo pipefail
-          version="${GITHUB_REF_NAME}"
+          version="${{ github.event_name == 'workflow_dispatch' && inputs.version || github.ref_name }}"
           notes_source="docs/releases/${version}.md"
           notes_target="release-notes.md"
 
@@ -77,6 +87,6 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.ref_name }}
+          tag_name: ${{ github.event_name == 'workflow_dispatch' && inputs.version || github.ref_name }}
           name: InnoNetworkProtobuf ${{ steps.notes.outputs.version }}
           body_path: ${{ steps.notes.outputs.notes_path }}
