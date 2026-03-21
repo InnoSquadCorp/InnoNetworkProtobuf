@@ -9,10 +9,6 @@ concurrency:
   group: release-${{ github.ref }}
   cancel-in-progress: false
 
-env:
-  INNONETWORK_REPOSITORY: InnoSquadCorp/InnoNetwork
-  INNONETWORK_REF: codex/split-protobuf-package
-
 jobs:
   validate-release:
     name: Validate Release
@@ -27,12 +23,6 @@ jobs:
 
       - name: Select Xcode
         run: sudo xcode-select -s /Applications/Xcode_26.0.1.app
-
-      - name: Checkout InnoNetwork core
-        run: |
-          git clone --depth 1 --branch "$INNONETWORK_REF" \
-            "https://github.com/${INNONETWORK_REPOSITORY}.git" \
-            ../InnoNetwork-release-tag
 
       - name: Resolve dependencies
         run: xcrun swift package resolve

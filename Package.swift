@@ -19,7 +19,10 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-protobuf.git", from: "1.35.0"),
-        .package(name: "InnoNetwork", path: "../InnoNetwork-release-tag"),
+        .package(
+            url: "https://github.com/InnoSquadCorp/InnoNetwork.git",
+            branch: "codex/split-protobuf-package"
+        ),
     ],
     targets: [
         .target(

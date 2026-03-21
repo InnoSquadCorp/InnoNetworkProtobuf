@@ -12,7 +12,10 @@ let package = Package(
         .visionOS(.v2)
     ],
     dependencies: [
-        .package(name: "InnoNetwork", path: "../../../InnoNetwork-release-tag"),
+        .package(
+            url: "https://github.com/InnoSquadCorp/InnoNetwork.git",
+            branch: "codex/split-protobuf-package"
+        ),
         .package(name: "InnoNetworkProtobuf", path: "../.."),
     ],
     targets: [

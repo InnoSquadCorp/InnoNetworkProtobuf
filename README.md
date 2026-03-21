@@ -8,7 +8,10 @@ It keeps protobuf request serialization and response decoding out of the core pa
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/InnoSquadCorp/InnoNetwork.git", from: "4.0.0"),
+    .package(
+        url: "https://github.com/InnoSquadCorp/InnoNetwork.git",
+        branch: "codex/split-protobuf-package"
+    ),
     .package(url: "https://github.com/InnoSquadCorp/InnoNetworkProtobuf.git", from: "1.0.0"),
 ]
 ```
@@ -103,7 +106,7 @@ print(response)
 
 - GET requests with protobuf parameters are rejected. Binary protobuf payloads are body-only.
 - For `204 No Content` or empty responses, use `ProtobufEmptyResponse` or a custom type conforming to `HTTPEmptyResponseMessage`.
-- The local workspace currently uses a path-based dependency on `InnoNetwork` for split-package validation. Before publishing this package, update `Package.swift` to the released `InnoNetwork` version that contains the protobuf SPI bridge.
+- Until the matching `InnoNetwork` major release ships, this package depends on the `codex/split-protobuf-package` branch of the core repository. Replace that branch dependency with a version requirement when the split lands in a tagged release.
 
 ## Stability
 
