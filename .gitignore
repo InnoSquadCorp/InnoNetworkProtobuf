@@ -1,0 +1,8 @@
+.build/
+.swiftpm/
+**/.swiftpm/
+**/Package.resolved
+DerivedData/
+build/
+docs-build/
+.DS_Store
