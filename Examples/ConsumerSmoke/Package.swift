@@ -14,7 +14,7 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/InnoSquadCorp/InnoNetwork.git",
-            branch: "codex/split-protobuf-package"
+            exact: "3.0.1"
         ),
         .package(name: "InnoNetworkProtobuf", path: "../.."),
     ],

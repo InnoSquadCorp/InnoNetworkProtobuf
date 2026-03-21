@@ -21,7 +21,7 @@ let package = Package(
         .package(url: "https://github.com/apple/swift-protobuf.git", from: "1.35.0"),
         .package(
             url: "https://github.com/InnoSquadCorp/InnoNetwork.git",
-            branch: "codex/split-protobuf-package"
+            exact: "3.0.1"
         ),
     ],
     targets: [

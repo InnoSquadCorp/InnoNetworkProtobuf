@@ -10,9 +10,9 @@ It keeps protobuf request serialization and response decoding out of the core pa
 dependencies: [
     .package(
         url: "https://github.com/InnoSquadCorp/InnoNetwork.git",
-        branch: "codex/split-protobuf-package"
+        exact: "3.0.1"
     ),
-    .package(url: "https://github.com/InnoSquadCorp/InnoNetworkProtobuf.git", from: "1.0.0"),
+    .package(url: "https://github.com/InnoSquadCorp/InnoNetworkProtobuf.git", exact: "3.0.1"),
 ]
 ```
 
@@ -106,7 +106,7 @@ print(response)
 
 - GET requests with protobuf parameters are rejected. Binary protobuf payloads are body-only.
 - For `204 No Content` or empty responses, use `ProtobufEmptyResponse` or a custom type conforming to `HTTPEmptyResponseMessage`.
-- Until the matching `InnoNetwork` major release ships, this package depends on the `codex/split-protobuf-package` branch of the core repository. Replace that branch dependency with a version requirement when the split lands in a tagged release.
+- This package is pinned to `InnoNetwork` `3.0.1`. Keep both packages on the same `3.x` release line when updating dependencies.
 
 ## Stability
 

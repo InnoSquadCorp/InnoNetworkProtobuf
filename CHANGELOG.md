@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on Keep a Changelog and the project follows Semantic Versioning for the public 1.x line.
+The format is based on Keep a Changelog and the project follows Semantic Versioning for the public 3.x line.
 
 ## [Unreleased]
 
@@ -10,7 +10,7 @@ The format is based on Keep a Changelog and the project follows Semantic Version
 
 - No unreleased entries yet.
 
-## [1.0.0]
+## [3.0.1]
 
 ### Added
 
@@ -22,3 +22,4 @@ The format is based on Keep a Changelog and the project follows Semantic Version
 ### Changed
 
 - Protobuf support now lives outside the core `InnoNetwork` package so consumers that do not need protobuf no longer resolve `swift-protobuf`
+- Core dependency is pinned to `InnoNetwork` `3.0.1` for the initial public release
