@@ -1,5 +1,5 @@
 import Foundation
-@_spi(ProtobufSupport) import InnoNetwork
+import InnoNetwork
 import SwiftProtobuf
 
 

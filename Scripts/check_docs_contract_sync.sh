@@ -87,6 +87,7 @@ require_contains "InnoNetworkProtobuf" "$readme"
 require_contains "InnoNetwork" "$readme"
 require_contains "Protocol Buffers" "$readme"
 require_contains "protobufRequest" "$readme"
+require_contains 'branch: "main"' "$readme"
 
 for doc in "${required_meta_docs[@]}"; do
   [[ -f "$doc" ]] || fail "required OSS document is missing: $doc"

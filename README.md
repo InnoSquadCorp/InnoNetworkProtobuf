@@ -10,9 +10,9 @@ It keeps protobuf request serialization and response decoding out of the core pa
 dependencies: [
     .package(
         url: "https://github.com/InnoSquadCorp/InnoNetwork.git",
-        exact: "3.0.1"
+        branch: "main"
     ),
-    .package(url: "https://github.com/InnoSquadCorp/InnoNetworkProtobuf.git", exact: "3.0.1"),
+    .package(url: "https://github.com/InnoSquadCorp/InnoNetworkProtobuf.git", branch: "main"),
 ]
 ```
 
@@ -36,6 +36,10 @@ struct GetUserRequest: SwiftProtobuf.Message, Sendable {
     var unknownFields = SwiftProtobuf.UnknownStorage()
 
     init() {}
+
+    init(userID: Int32) {
+        self.userID = userID
+    }
 
     static let protoMessageName = "GetUserRequest"
 
@@ -84,8 +88,9 @@ struct GetUser: ProtobufAPIDefinition {
 let client = DefaultNetworkClient(
     configuration: .safeDefaults(baseURL: URL(string: "https://api.example.com")!)
 )
+let protobufClient: any ProtobufNetworkClient = client
 
-let response = try await client.protobufRequest(
+let response = try await protobufClient.protobufRequest(
     GetUser(parameters: GetUserRequest(userID: 1))
 )
 print(response)
@@ -100,13 +105,13 @@ print(response)
 - `AnyResponseDecoder.protobuf()`
 - `AnyResponseDecoder.protobufEmptyCapable()`
 
-`DefaultNetworkClient` still comes from the core `InnoNetwork` package. This package only adds protobuf request execution and decoding on top of it.
+`DefaultNetworkClient` still comes from the core `InnoNetwork` package. This package only adds protobuf request execution and decoding on top of it through the stable public low-level execution contract.
 
 ## Notes
 
 - GET requests with protobuf parameters are rejected. Binary protobuf payloads are body-only.
 - For `204 No Content` or empty responses, use `ProtobufEmptyResponse` or a custom type conforming to `HTTPEmptyResponseMessage`.
-- This package is pinned to `InnoNetwork` `3.0.1`. Keep both packages on the same `3.x` release line when updating dependencies.
+- Follow `InnoNetwork` `main` together with `InnoNetworkProtobuf` `main` so the public low-level execution API and protobuf adapter stay in sync.
 
 ## Stability
 

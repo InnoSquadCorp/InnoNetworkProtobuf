@@ -14,7 +14,7 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/InnoSquadCorp/InnoNetwork.git",
-            exact: "3.0.1"
+            branch: "main"
         ),
         .package(name: "InnoNetworkProtobuf", path: "../.."),
     ],

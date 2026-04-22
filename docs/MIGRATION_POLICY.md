@@ -12,4 +12,4 @@
 ## Internal / Operational
 
 - Internal details are not migration-contract items.
-- Changes to SPI imports, local workspace wiring, or adapter internals do not require public migration docs unless they affect documented behavior.
+- Changes to local workspace wiring or adapter internals do not require public migration docs unless they affect documented behavior.
