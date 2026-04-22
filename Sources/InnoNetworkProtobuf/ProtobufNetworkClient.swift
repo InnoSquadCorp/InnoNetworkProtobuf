@@ -1,5 +1,5 @@
 import Foundation
-@_spi(ProtobufSupport) import InnoNetwork
+import InnoNetwork
 
 
 public protocol ProtobufNetworkClient: NetworkClient {
@@ -8,6 +8,6 @@ public protocol ProtobufNetworkClient: NetworkClient {
 
 extension DefaultNetworkClient: ProtobufNetworkClient {
     public func protobufRequest<T: ProtobufAPIDefinition>(_ request: T) async throws -> T.APIResponse {
-        try await performTypedRequest(ProtobufSingleRequestExecutable(base: request))
+        try await perform(executable: ProtobufSingleRequestExecutable(base: request))
     }
 }

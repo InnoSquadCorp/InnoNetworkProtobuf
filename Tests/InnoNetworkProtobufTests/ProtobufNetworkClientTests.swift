@@ -226,6 +226,24 @@ struct ProtobufNetworkClientTests {
         #expect(mockSession.capturedRequest?.httpBody == nil)
     }
 
+    @Test("Protocol-erased ProtobufNetworkClient executes protobuf requests")
+    func protobufRequestViaProtocolExistential() async throws {
+        let mockSession = MockURLSession()
+        let expectedResponse = TestUserResponse(userID: 7, name: "Erased Client", email: "erased@example.com")
+        let responseData = try protobufData(expectedResponse)
+        mockSession.setMockResponse(statusCode: 200, data: responseData)
+
+        let client: any ProtobufNetworkClient = DefaultNetworkClient(
+            configuration: TestAPIConfiguration(),
+            session: mockSession
+        )
+
+        let response = try await client.protobufRequest(GetUserProtobuf(userID: 7))
+        #expect(response.userID == 7)
+        #expect(response.name == "Erased Client")
+        #expect(mockSession.capturedRequest?.httpMethod == "POST")
+    }
+
     @Test("HTTP 404 error throws NetworkError.statusCode")
     func protobuf404Error() async throws {
         let mockSession = MockURLSession()

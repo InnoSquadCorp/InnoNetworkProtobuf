@@ -8,7 +8,16 @@ The format is based on Keep a Changelog and the project follows Semantic Version
 
 ### Added
 
-- No unreleased entries yet.
+- Consumer smoke now compiles a real `protobufRequest(_:)` call through
+  `any ProtobufNetworkClient`, so regressions in the public adapter
+  entry point are caught without `@testable import`.
+
+### Changed
+
+- The protobuf adapter now tracks `InnoNetwork` `main` on `main` and
+  runs on the stable public low-level execution contract
+  (`perform(executable:)`, `SingleRequestExecutable`, `RequestPayload`)
+  instead of any private bridge.
 
 ## [3.0.1]
 

@@ -20,7 +20,6 @@ This document defines the compatibility contract for the public OSS release of `
 ## Internal/Operational
 
 - protobuf adapter execution internals
-- SPI imports used to bridge into `InnoNetwork`
 - local workspace dependency wiring before the matching `InnoNetwork` release ships
 - test support utilities and CI workflow structure
 
@@ -28,3 +27,5 @@ This document defines the compatibility contract for the public OSS release of `
 
 - Stable items follow semantic versioning once the package is published.
 - `InnoNetwork` remains the source of truth for `DefaultNetworkClient`, transport behavior, retry behavior, and trust policy.
+- `ProtobufNetworkClient` depends on the stable public low-level execution contract in `InnoNetwork`:
+  `LowLevelNetworkClient`, `perform(executable:)`, `SingleRequestExecutable`, and `RequestPayload`.
