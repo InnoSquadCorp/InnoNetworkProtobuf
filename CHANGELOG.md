@@ -2,13 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on Keep a Changelog and the project follows Semantic Versioning for the public 3.x line.
+The format is based on Keep a Changelog. Released 3.x tags remain stable while
+`main` prepares the next major line alongside InnoNetwork 5.0.
 
 ## [Unreleased]
 
 ### Added
 
-- No unreleased entries yet.
+- Explicit `sessionAuthentication` intent on every `ProtobufAPIDefinition`.
+
+### Changed
+
+- Follow the unreleased InnoNetwork 5.0 `main` branch until matching release
+  tags are available.
+- Use the narrow `GeneratedClientSupport` SPI for binary payload execution and
+  `InnoNetworkTestSupport` for consumer-owned transport tests.
+- Map protobuf decode failures to the structured `NetworkError.decoding` case
+  and migrate retry/configuration tests to the 5.0 contracts.
 
 ## [3.0.1]
 

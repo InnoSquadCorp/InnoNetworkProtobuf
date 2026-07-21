@@ -12,14 +12,18 @@ func makeTestNetworkConfiguration(
     trustPolicy: TrustPolicy = .systemDefault,
     eventObservers: [any NetworkEventObserving] = []
 ) -> NetworkConfiguration {
-    NetworkConfiguration(
+    NetworkConfiguration.advanced(
         baseURL: URL(string: baseURL)!,
-        timeout: timeout,
-        cachePolicy: cachePolicy,
-        retryPolicy: retryPolicy,
-        networkMonitor: networkMonitor,
-        metricsReporter: metricsReporter,
-        trustPolicy: trustPolicy,
-        eventObservers: eventObservers
+        resilience: ResiliencePack(retry: retryPolicy),
+        observability: ObservabilityPack(
+            eventObservers: eventObservers,
+            networkMonitor: networkMonitor,
+            metricsReporter: metricsReporter
+        ),
+        transport: TransportPack(
+            timeout: timeout,
+            cachePolicy: cachePolicy,
+            trustPolicy: trustPolicy
+        )
     )
 }

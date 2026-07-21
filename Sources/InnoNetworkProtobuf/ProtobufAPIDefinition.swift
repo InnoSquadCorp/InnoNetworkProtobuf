@@ -18,6 +18,7 @@ import SwiftProtobuf
 ///
 ///     var method: HTTPMethod { .post }
 ///     var path: String { "/user" }
+///     var sessionAuthentication: SessionAuthentication { .anonymous }
 ///     let parameters: UserRequestProto?
 ///
 ///     init(userID: Int32) {
@@ -41,6 +42,7 @@ public protocol ProtobufAPIDefinition: Sendable {
     var parameters: Parameter? { get }
     var method: HTTPMethod { get }
     var path: String { get }
+    var sessionAuthentication: SessionAuthentication { get }
     var responseDecoder: AnyResponseDecoder<APIResponse> { get }
 
     var headers: HTTPHeaders { get }

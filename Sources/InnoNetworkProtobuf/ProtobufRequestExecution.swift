@@ -1,5 +1,5 @@
 import Foundation
-@_spi(ProtobufSupport) import InnoNetwork
+@_spi(GeneratedClientSupport) import InnoNetwork
 import SwiftProtobuf
 
 
@@ -12,14 +12,17 @@ struct ProtobufSingleRequestExecutable<Base: ProtobufAPIDefinition>: SingleReque
     var method: HTTPMethod { base.method }
     var path: String { base.path }
     var headers: HTTPHeaders { base.headers }
+    var sessionAuthentication: SessionAuthentication { base.sessionAuthentication }
 
     func makePayload() throws -> RequestPayload {
         if case .get = method {
             if base.parameters != nil {
-                throw NetworkError.invalidRequestConfiguration(
-                    "GET requests with protobuf parameters are not supported. " +
-                    "Protobuf messages cannot be serialized to URL query parameters. " +
-                    "Use POST/PUT methods for requests with protobuf body, or set parameters to nil for GET requests."
+                throw NetworkError.configuration(
+                    reason: .invalidRequest(
+                        "GET requests with protobuf parameters are not supported. " +
+                        "Protobuf messages cannot be serialized to URL query parameters. " +
+                        "Use POST/PUT methods for requests with protobuf body, or set parameters to nil for GET requests."
+                    )
                 )
             }
             return .none

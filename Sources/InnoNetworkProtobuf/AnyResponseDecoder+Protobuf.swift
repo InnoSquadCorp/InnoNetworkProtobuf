@@ -9,7 +9,11 @@ public extension AnyResponseDecoder where Output: SwiftProtobuf.Message {
             do {
                 return try Output(serializedBytes: data)
             } catch {
-                throw NetworkError.objectMapping(SendableUnderlyingError(error), response)
+                throw NetworkError.decoding(
+                    stage: .responseBody,
+                    underlying: SendableUnderlyingError(error),
+                    response: response
+                )
             }
         }
     }
@@ -25,7 +29,11 @@ public extension AnyResponseDecoder where Output: SwiftProtobuf.Message & HTTPEm
             do {
                 return try Output(serializedBytes: data)
             } catch {
-                throw NetworkError.objectMapping(SendableUnderlyingError(error), response)
+                throw NetworkError.decoding(
+                    stage: .responseBody,
+                    underlying: SendableUnderlyingError(error),
+                    response: response
+                )
             }
         }
     }

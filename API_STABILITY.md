@@ -27,4 +27,6 @@ This document defines the compatibility contract for the public OSS release of `
 ## Notes
 
 - Stable items follow semantic versioning once the package is published.
+- `ProtobufAPIDefinition.sessionAuthentication` is a required security witness;
+  endpoint declarations cannot inherit an implicit authentication mode.
 - `InnoNetwork` remains the source of truth for `DefaultNetworkClient`, transport behavior, retry behavior, and trust policy.

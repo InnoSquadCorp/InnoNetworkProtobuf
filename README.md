@@ -4,6 +4,10 @@
 
 It keeps protobuf request serialization and response decoding out of the core package so clients that only use JSON, form, download, or websocket features do not need to resolve `swift-protobuf`.
 
+> `main` is currently aligned with the unreleased InnoNetwork 5.0 development
+> branch. No 5.0 tag has been published; use the 3.0.1 tag pair below for the
+> latest released line.
+
 ## Installation
 
 ```swift
@@ -78,6 +82,7 @@ struct GetUser: ProtobufAPIDefinition {
 
     var method: HTTPMethod { .post }
     var path: String { "/users.protobuf" }
+    var sessionAuthentication: SessionAuthentication { .anonymous }
     let parameters: GetUserRequest?
 }
 
@@ -106,7 +111,10 @@ print(response)
 
 - GET requests with protobuf parameters are rejected. Binary protobuf payloads are body-only.
 - For `204 No Content` or empty responses, use `ProtobufEmptyResponse` or a custom type conforming to `HTTPEmptyResponseMessage`.
-- This package is pinned to `InnoNetwork` `3.0.1`. Keep both packages on the same `3.x` release line when updating dependencies.
+- Released `3.0.1` remains paired with `InnoNetwork` `3.0.1`. The development
+  branch follows InnoNetwork `main` until matching 5.0 release tags are cut.
+- Every protobuf endpoint declares `sessionAuthentication` explicitly so a
+  migration cannot silently change whether refresh-token policy runs.
 
 ## Stability
 

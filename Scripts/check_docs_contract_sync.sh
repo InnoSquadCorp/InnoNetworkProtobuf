@@ -77,6 +77,7 @@ documented_sorted="$(printf '%s\n' "${documented_stable[@]:-}" | LC_ALL=C sort)"
 [[ "$expected_sorted" == "$documented_sorted" ]] || fail "Stable symbol list in API_STABILITY.md does not match expected allowlist"
 
 require_pattern "public protocol ProtobufAPIDefinition" "$repo_root/Sources/InnoNetworkProtobuf/ProtobufAPIDefinition.swift"
+require_pattern "var sessionAuthentication: SessionAuthentication { get }" "$repo_root/Sources/InnoNetworkProtobuf/ProtobufAPIDefinition.swift"
 require_pattern "public protocol ProtobufNetworkClient" "$repo_root/Sources/InnoNetworkProtobuf/ProtobufNetworkClient.swift"
 require_pattern "public struct ProtobufEmptyResponse" "$repo_root/Sources/InnoNetworkProtobuf/ProtobufEmptyResponse.swift"
 require_pattern "public protocol HTTPEmptyResponseMessage" "$repo_root/Sources/InnoNetworkProtobuf/EmptyResponseMessage.swift"
@@ -87,6 +88,8 @@ require_contains "InnoNetworkProtobuf" "$readme"
 require_contains "InnoNetwork" "$readme"
 require_contains "Protocol Buffers" "$readme"
 require_contains "protobufRequest" "$readme"
+require_contains "No 5.0 tag has been published" "$readme"
+require_contains 'branch: "main"' "$repo_root/Package.swift"
 
 for doc in "${required_meta_docs[@]}"; do
   [[ -f "$doc" ]] || fail "required OSS document is missing: $doc"

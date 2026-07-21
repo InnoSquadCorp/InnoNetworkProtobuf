@@ -51,6 +51,7 @@ private struct SmokeAPI: ProtobufAPIDefinition {
 
     var method: HTTPMethod { .post }
     var path: String { "/protobuf" }
+    var sessionAuthentication: SessionAuthentication { .anonymous }
     var parameters: SmokeRequest? { SmokeRequest() }
 }
 
